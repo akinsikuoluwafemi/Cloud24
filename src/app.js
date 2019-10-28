@@ -1,6 +1,6 @@
 import Search, { cities } from './models/Search';
 import * as  searchView from './views/searchView';
-import { elements, renderLoader, clearLoader } from './views/base';
+import { elements, renderLoader, clearLoader,countries } from './views/base';
 import axios from 'axios'
 
 
@@ -13,7 +13,7 @@ const state = {};
 // a function that will be ran anytime we submit the form
 const controlSearch = async() => {
     // get the query from the view
-    const query = searchView.getInput()
+    const query = searchView.getInput();
     console.log(query);
 
     if(query) {
@@ -42,6 +42,8 @@ const controlSearch = async() => {
         searchView.renderWeatherHours(state.search.resultHours);
         searchView.renderWeathersDays(state.search.resultDays);
         searchView.renderWeatherAlerts(state.search.resultDays);
+        elements.searchInput.value
+
 
 
         //  change textContent of the location text
@@ -56,7 +58,62 @@ const controlSearch = async() => {
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
+    elements.showSearch.style.display = 'none';
 })
+
+
+
+let findMatches = (wordToMatch,cities) =>{
+    return cities.filter(place => {
+        const regex = new RegExp(wordToMatch, 'gi');
+        return place.match(regex)
+    })
+   
+}
+
+
+function displayMatches() {
+    const matchArray = findMatches(this.value, countries)
+    const html = matchArray.map(place => {
+        return`
+                <li class="list-span"><span>${place}</span></li>
+            
+        `
+    }).join('');
+        elements.showSearch.innerHTML = html;
+
+}
+// come back here
+if(elements.list === null){
+    
+}else {
+        elements.list.addEventListener('click',(e) => {
+        console.log(e.target);
+    })
+}
+
+
+elements.searchInput.addEventListener('change', () => {
+    displayMatches()
+    elements.showSearch.style.zIndex = '-1';
+    elements.showSearch.style.opacity = '0';
+});
+elements.searchInput.addEventListener('keyup', displayMatches);
+
+
+elements.searchInput.addEventListener('input', () => {
+    elements.showSearch.style.zIndex = '2';
+    elements.showSearch.style.opacity = '1';
+
+
+});
+
+
+
+
+
+
+
 
 
 
@@ -79,182 +136,12 @@ window.onscroll = checkScroll;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-// what happens any time the page loads, i left it here because it works independently i.e it happens when the page loads
+// what happens any time the page loads
 
 
 
  
 
-const countries = [
-
-        'Afghanistan',
-        'Albania',
-        'Algeria',	
-        'Andorra',	
-        'Angola',
-        'Argentina'	,
-        'Armenia'	,
-        'Australia'	,
-        'Austria'	,
-        'Azerbaijan',	
-        'Bahamas'	,
-        'Bahrain'	,
-        'Bangladesh',	
-        'Barbados',	
-        'Belarus',	
-        'Belgium',
-        'Benin'	,
-        'Bolivia'	,
-        'Botswana',
-        'Brazil'	,
-        'Bulgaria'	,
-        'Burkina Faso',	
-        'Burundi'	,
-        "Côte d'Ivoire",	
-        'Cabo Verde',
-        'Cambodia',	
-        'Canada',	
-        'Chad'	,
-        'Chile'	,
-        'China'	,
-        'Colombia'	,
-        'Comoros'	,
-        'Costa Rica',	
-        'Cuba'	,
-        'Cyprus'	,
-        'Czech Republic',
-        'Denmark'	,
-        'Djibouti'	,
-        'Dominican Republic',	
-        'Ecuador',	
-        'Egypt'	,
-        'El Salvador'	,
-        'Equatorial Guinea',	
-        'Eritrea',
-        'Estonia',
-        'Ethiopia',	
-        'Fiji'	,
-        'Finland',
-        'France',	
-        'Gabon'	,
-        'Gambia',	
-        'Georgia',	
-        'Germany',
-        'Ghana'	,
-        'Greece'	,
-        'Grenada'	,
-        'Guatemala',	
-        'Guinea',	
-        'Haiti',
-        'Honduras',	
-        'Hungary',	
-        'Iceland',	
-        'India'	,
-        'Indonesia',	
-        'Iran'	,
-        'Iraq'	,
-        'Ireland',	
-        'Israel',	
-        'Italy'	,
-        'Jamaica',
-        'Japan'	,
-        'Jordan'	,
-        'Kazakhstan',	
-        'Kenya'	,
-        'Kuwait',
-        'Laos'	,
-        'Lebanon',	
-        'Liberia',	
-        'Luxembourg',	
-        'Madagascar',	
-        'Malawi'	,
-        'Malaysia'	,
-        'Mali'	,
-        'Malta'	,
-        'Mauritania',	
-        'Mauritius'	,
-        'Moldova'	,
-        'Monaco'	,
-        'Mongolia'	,
-        'Montenegro',
-        'Morocco',
-        'Mozambique',	
-        'Netherlands',	
-        'New Zealand',	
-        'Niger'	,
-        'Nigeria'	,
-        'North Korea'	,
-        'North Macedonia',
-        'Norway',	
-        'Oman',	
-        'Pakistan',	
-        'Panama',	
-        'Papua New Guinea',	
-        'Paraguay',	
-        'Peru',	
-        'Philippines',
-        'Poland',	
-        'Portugal',	
-        'Qatar',	
-        'Romania',	
-        'Russia',
-        'Rwanda',	
-        'Saint Kitts and Nevis',	
-        'Saint Lucia',
-        'San Marino',	
-        'Saudi Arabia',	
-        'Senegal',
-        'Serbia',	
-        'Seychelles',
-        'Sierra Leone',	
-        'Singapore',
-        'Slovakia',	
-        'Slovenia',	
-        'Solomon Islands',
-        'Somalia',
-        'South Africa',	
-        'South Korea',	
-        'Spain',	
-        'Sri Lanka',	
-        'Sudan',	
-        'Sweden',	
-        'Switzerland',
-        'Syria',	
-        'Tanzania',	
-        'Togo',	
-        'Tunisia',	
-        'Turkey',	
-        'United Arab Emirates',
-        'United Kingdom',
-        'United States of America',	
-        'Uruguay',
-        'Venezuela'
-]
 
 const random = Math.floor(Math.random() * countries.length);   
 
@@ -304,6 +191,12 @@ async function dayAlertOnDomLoad(query) {
 
 document.addEventListener('DOMContentLoaded', dayAlertOnDomLoad(countries[random]));  
 
+elements.searchInput.value
 
+console.log(countries)
 
-   
+// let newCountry = countries.filter(coun => {
+//     return coun.includes('Tur')
+// });
+// console.log(newCountry)
+

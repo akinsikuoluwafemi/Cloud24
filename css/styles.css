@@ -179,8 +179,10 @@ input[type="text"] {
     font-size: 1.8rem;
     border: none;
     margin-right: 1.5rem;
-    color: #ccc;
     border: 1px solid #eee;
+    outline: none;
+    color: #000;
+    background: #bbb;
 
 }
 
@@ -222,6 +224,38 @@ input[type="text"]::-webkit-input-placeholder {
     width: 3rem;
     text-align: center;
 
+
+}
+
+.list-span {
+    list-style: none;
+    font-size: 2rem;
+    width: 63rem;
+    color: #000;
+    padding: 1rem;
+    background:#ccc;
+    letter-spacing: .2rem;
+    font-family: lato;
+
+
+}
+.list-span:hover {
+    background: #eee;
+}
+.div-show {
+    padding: 0;
+    margin-top: -2rem;
+    position: absolute;  
+    z-index: -1; 
+    opacity: 0; 
+}
+
+
+.list-span > span {
+    padding: 2rem;
+}
+.div-show {
+   
 
 }
 
