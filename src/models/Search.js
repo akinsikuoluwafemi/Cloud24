@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-export const cities = [];
 export default class Search {
     constructor(query){
         this.query = query;
@@ -63,7 +62,6 @@ export default class Search {
             let { alerts } = data;
             this.resultAlerts = alerts
             console.log(this.resultAlerts);
-            // if (this.query) this.cities.push(this.query)
 
             
         }
@@ -81,4 +79,5 @@ export default class Search {
 
 
     
+
 

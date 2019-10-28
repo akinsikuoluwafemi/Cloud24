@@ -1,6 +1,8 @@
 import Search, { cities } from './models/Search';
 import * as  searchView from './views/searchView';
-import { elements,renderLoader,clearLoader } from './views/base';
+import { elements, renderLoader, clearLoader } from './views/base';
+import axios from 'axios'
+
 
 // global state of the app
     // >search Object
@@ -79,45 +81,34 @@ window.onscroll = checkScroll;
 
 
 
-// const displayWeather = () => {
-//     const cities = ['']
-    
-// console.log(state.search)
-//     const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_hourly&name=${this.query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
-//     let { data } = request;
-//     let { hourlyForecasts } = data;
-//     let { forecastLocation } = hourlyForecasts;
-//     let { forecast } = forecastLocation;
-//     this.resultHours = forecast;
-//     console.log(this.resultHours);
 
 
 
-// }
-
-// document.addEventListener('DOMContentLoaded', displayWeather);
 
 
- async function domAlerts(product, app_id, app_code) {
-        
-        try {
-                // const app_id = `DemoAppId01082013GAL`;
-            //    const app_code = `AJKnXv84fjrb0KIHawS0Tg`;
-            const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=alerts&name=${this.query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
 
-                let { data } = request;
-            let { alerts } = data;
-            this.resultAlerts = alerts
-            console.log(this.resultAlerts);
-            // if (this.query) this.cities.push(this.query)
 
-            
-        }
-        catch(err) {
-            console.log(`This is an error: ${err}`);
-        }
 
-    }
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+// what happens any time the page loads, i left it here because it works independently i.e it happens when the page loads
+
+
+
+ 
 
 const countries = [
 
@@ -147,7 +138,6 @@ const countries = [
         "Côte d'Ivoire",	
         'Cabo Verde',
         'Cambodia',	
-        'Cameroon',	
         'Canada',	
         'Chad'	,
         'Chile'	,
@@ -155,7 +145,6 @@ const countries = [
         'Colombia'	,
         'Comoros'	,
         'Costa Rica',	
-        'Croatia',	
         'Cuba'	,
         'Cyprus'	,
         'Czech Republic',
@@ -199,18 +188,12 @@ const countries = [
         'Kenya'	,
         'Kuwait',
         'Laos'	,
-        'Latvia',	
         'Lebanon',	
-        'Lesotho',
         'Liberia',	
-        'Libya'	,
-        'Liechtenstein',	
-        'Lithuania'	,
         'Luxembourg',	
         'Madagascar',	
         'Malawi'	,
         'Malaysia'	,
-        'Maldives'	,
         'Mali'	,
         'Malta'	,
         'Mauritania',	
@@ -218,12 +201,9 @@ const countries = [
         'Moldova'	,
         'Monaco'	,
         'Mongolia'	,
-        'Montenegro'	,
+        'Montenegro',
         'Morocco',
         'Mozambique',	
-        'Namibia',	
-        'Nauru'	,
-        'Nepal'	,
         'Netherlands',	
         'New Zealand',	
         'Niger'	,
@@ -233,7 +213,6 @@ const countries = [
         'Norway',	
         'Oman',	
         'Pakistan',	
-        'Palau',	
         'Panama',	
         'Papua New Guinea',	
         'Paraguay',	
@@ -267,11 +246,9 @@ const countries = [
         'Switzerland',
         'Syria',	
         'Tanzania',	
-        'Thailand',	
         'Togo',	
         'Tunisia',	
         'Turkey',	
-        'Ukraine',	
         'United Arab Emirates',
         'United Kingdom',
         'United States of America',	
@@ -282,3 +259,51 @@ const countries = [
 const random = Math.floor(Math.random() * countries.length);   
 
 console.log(countries[random])     
+
+
+
+ async function hoursAlertOnDomLoad(query) {
+            
+        
+        const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_hourly&name=${query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
+
+        let { data } = request;
+        let { hourlyForecasts } = data;
+        let { forecastLocation } = hourlyForecasts;
+        let { forecast } = forecastLocation;
+     console.log(forecast);  
+     console.log(countries[random])  
+     
+     searchView.renderHoursOnDomLoad(forecast);
+     elements.searchLocation.textContent = query.split(' ', 2).join(' ');
+     
+
+ }
+document.addEventListener('DOMContentLoaded', hoursAlertOnDomLoad(countries[random]));
+
+
+
+
+
+async function dayAlertOnDomLoad(query) {
+            
+        
+        const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_7days&name=${query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
+
+        let { data } = request;
+        let { forecasts } = data;
+        let { forecastLocation } = forecasts;
+        let { forecast } = forecastLocation;
+        console.log(forecast);
+    console.log(countries[random]) 
+    searchView.renderDaysOnDomLoad(forecast)
+        
+    }
+    
+    
+
+document.addEventListener('DOMContentLoaded', dayAlertOnDomLoad(countries[random]));  
+
+
+
+   
