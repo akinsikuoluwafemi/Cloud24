@@ -250,12 +250,17 @@ input[type="text"]::-webkit-input-placeholder {
     opacity: 0; 
 }
 
+.h1 {
+    color: #1D9EED;
+}
 
 .list-span > span {
     padding: 2rem;
 }
-.div-show {
-   
+.show {
+   display: none;
+    z-index: 1; 
+    opacity: 1;
 
 }
 
@@ -280,9 +285,23 @@ input[type="text"]::-webkit-input-placeholder {
     font-size: 1.5rem;
 }
 
+
 .default-text {
     margin-left: .5rem;
 
+}
+.default-text:hover {
+    color: white;
+}
+.delete {
+    color: #1D9EED;
+    margin-left: 2rem;
+}
+.delete:hover {
+    color: white;
+}
+.delete + p {
+    margin-left: .2rem;
 }
 
 .line {

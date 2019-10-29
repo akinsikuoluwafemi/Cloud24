@@ -85,7 +85,9 @@ export const renderWeatherHours = weather =>{
 export const renderWeathersDays = (weathers) => {
     // render results of current page
    
-    weathers.slice(0,5).forEach(renderWeatherForDays);
+    weathers.slice(0, 5).forEach(renderWeatherForDays);
+    // weathers.forEach(renderWeatherForDays);
+    
 
 };
 

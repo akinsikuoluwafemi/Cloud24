@@ -8,10 +8,10 @@ export default class Search {
 
 
     async  getWeatherHours(product,app_id,app_code) {
-        // const proxy = `https://cors-anywhere.heroku.com/`;
         try {
                 // const app_id = `DemoAppId01082013GAL`;
             //    const app_code = `AJKnXv84fjrb0KIHawS0Tg`;
+            // const proxy = `https://cors-anywhere.herokuapp.com/`
 
             const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=${product}&name=${this.query}&app_id=${app_id}&app_code=${app_code}`)
                 let { data } = request;
@@ -32,10 +32,11 @@ export default class Search {
 
     async getWeatherDays(product, app_id, app_code) {
         
-        //  const proxy = `https://cors-anywhere.heroku.com/`;
         try {
+        // const proxy = `https://cors-anywhere.heroku.com/`;
+
                 // const app_id = `DemoAppId01082013GAL`;
-            //    const app_code = `AJKnXv84fjrb0KIHawS0Tg`;
+                //    const app_code = `AJKnXv84fjrb0KIHawS0Tg`;
             const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=${product}&name=${this.query}&app_id=${app_id}&app_code=${app_code}`)
                 let { data } = request;
                 let { forecasts } = data;
@@ -55,6 +56,8 @@ export default class Search {
      async getAlerts(product, app_id, app_code) {
         
         try {
+            // const proxy = `https://cors-anywhere.heroku.com/`;
+            
                 // const app_id = `DemoAppId01082013GAL`;
             //    const app_code = `AJKnXv84fjrb0KIHawS0Tg`;
             const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=${product}&name=${this.query}&app_id=${app_id}&app_code=${app_code}`)

@@ -58,9 +58,24 @@ const controlSearch = async() => {
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
-    elements.showSearch.style.display = 'none';
 })
 
+
+
+elements.searchInput.addEventListener('blur',e => {
+    console.log('you just blurred');
+    elements.showSearch.classList.toggle('show')
+    elements.list.classList.toggle('show')
+
+})
+
+
+elements.searchInput.addEventListener('input',e => {
+    console.log('you just focused out');
+    elements.showSearch.classList.toggle('show')
+    elements.list.classList.toggle('show')
+
+})
 
 
 let findMatches = (wordToMatch,cities) =>{
@@ -75,8 +90,10 @@ let findMatches = (wordToMatch,cities) =>{
 function displayMatches() {
     const matchArray = findMatches(this.value, countries)
     const html = matchArray.map(place => {
+        const regex = new RegExp(this.value, 'gi');
+        const cityName = place.replace(regex,`<span class="h1">${this.value}</span>`)
         return`
-                <li class="list-span"><span>${place}</span></li>
+                <li class="list-span"><span>${cityName}</span></li>
             
         `
     }).join('');
@@ -84,13 +101,13 @@ function displayMatches() {
 
 }
 // come back here
-if(elements.list === null){
+// if(elements.list === null){
     
-}else {
-        elements.list.addEventListener('click',(e) => {
-        console.log(e.target);
-    })
-}
+// }else {
+//         elements.list.addEventListener('click',(e) => {
+//         console.log(e.target);
+//     })
+// }
 
 
 elements.searchInput.addEventListener('change', () => {
@@ -101,6 +118,7 @@ elements.searchInput.addEventListener('change', () => {
 elements.searchInput.addEventListener('keyup', displayMatches);
 
 
+// come back here :)
 elements.searchInput.addEventListener('input', () => {
     elements.showSearch.style.zIndex = '2';
     elements.showSearch.style.opacity = '1';
@@ -151,8 +169,8 @@ console.log(countries[random])
 
  async function hoursAlertOnDomLoad(query) {
             
-        
-        const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_hourly&name=${query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
+     const proxy = `https://cors-anywhere.herokuapp.com/`
+        const request = await axios(`${proxy}https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_hourly&name=${query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
 
         let { data } = request;
         let { hourlyForecasts } = data;
@@ -173,9 +191,10 @@ document.addEventListener('DOMContentLoaded', hoursAlertOnDomLoad(countries[rand
 
 
 async function dayAlertOnDomLoad(query) {
+    const proxy = `https://cors-anywhere.herokuapp.com/`
             
         
-        const request = await axios(`https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_7days&name=${query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
+        const request = await axios(`${proxy}https://weather.cit.api.here.com/weather/1.0/report.json?product=forecast_7days&name=${query}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg`)
 
         let { data } = request;
         let { forecasts } = data;
