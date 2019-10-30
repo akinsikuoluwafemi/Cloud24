@@ -6,7 +6,7 @@ export default class Store{
         }else {
             stWeather = JSON.parse(localStorage.getItem('stWeather'));
         }
-        return stWeather;
+        return stWeather;  
     }
 
     static addWeather(weather) {
@@ -17,6 +17,18 @@ export default class Store{
         localStorage.setItem('stWeather', JSON.stringify(stWeather));
 
     }
+    static removeBook(query){
+        const weather = Store.getWeather();
+
+        weather.forEach(element, index => {
+            if(element.query === query) {
+                weather.splice(index, 1);
+            }
+        });
+        localStorage.setItem('weather', JSON.stringify(element))
+    }
 
    
 }
+
+

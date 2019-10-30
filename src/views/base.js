@@ -13,7 +13,13 @@ export const elements = {
     goButton: document.querySelector('.btn-container'),
     header: document.querySelector('.header'),
     showSearch: document.querySelector('.div-show'),
-    list: document.querySelector('.list-span')
+    list: document.querySelector('.list-span'),
+    delete: document.querySelector('.delete'),
+    recent: document.querySelector('.time-wrapper'),
+    recentLocation: document.querySelector('.recent-location'),
+    heading: document.querySelector('.heading'),
+    t: document.querySelector('.t')
+    
 
 }
 
@@ -100,7 +106,6 @@ export const countries = [
     'New Hampshire',
     'Porto',
     'Phoenix',
-    'Califonia',
     'San Jose',
     'Texas',
     'Florida',

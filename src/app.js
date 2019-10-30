@@ -40,6 +40,9 @@ const controlSearch = async() => {
         clearLoader();        
         // insert the two search results in the state
         searchView.renderWeatherHours(state.search.resultHours);
+
+        searchView.recentLocation(state.search.resultHours, query.toUpperCase());
+
         searchView.renderWeathersDays(state.search.resultDays);
         searchView.renderWeatherAlerts(state.search.resultDays);
         elements.searchInput.value
@@ -48,7 +51,7 @@ const controlSearch = async() => {
 
         //  change textContent of the location text
 
-        elements.searchLocation.textContent = query.split(' ',2).join(' ');
+        elements.searchLocation.textContent = query.split(' ',2).join(' ').toUpperCase();
         console.log(state);
 
     }
@@ -219,3 +222,30 @@ console.log(countries)
 // });
 // console.log(newCountry)
 
+
+// document.addEventListener('click',e => {
+//     console.log(e.target)
+//     e.parentElement.parentElement.parentElement.remove()
+// })
+// console.log(document.querySelector('.delete'))
+
+
+
+
+export const deleteRecentLocation =(el) => {
+    if(el.classList.contains('delete')){
+        el.parentElement.parentElement.parentElement.remove();
+    }
+} 
+
+// elements.t.addEventListener('click', e => {
+//     searchView.deleteRecentLocation(e.target);
+// })
+
+
+document.addEventListener('click', e => {
+    console.log(e.parentElement)
+    
+})
+
+console.log('boy');
