@@ -91,10 +91,7 @@ export const renderWeathersDays = (weathers) => {
 
 };
 
-    // come back to this
-export const renderWeatherAlerts = (query) => {
-    
-}
+
 
 
 
@@ -184,12 +181,6 @@ export const renderDaysOnDomLoad = (weathers) => {
 }
 
 
-// delete a location
-export const deleteRecentLocation =(el) => {
-    if(el.classList.contains('delete')){
-        el.parentElement.parentElement.parentElement.remove();
-    }
-}
 
 
 
@@ -201,10 +192,8 @@ export const recentLocation = (weather,query) => {
                             <p class="time-words words"><span>${query}</span></p>
                             <p class="time-num num">${parseInt(weather[0].temperature)}&deg;</p>
                             <div class="default">
-                                <i style="color: #1D9EED" class="fas fa-cog"></i>
-                                <p style="color: #1D9EED">Make Default</p>
                                 <i class="far fa-window-close delete"></i>
-                                <p style="color: #1D9EED">Remove</p>
+                                <p class="delete" style="color: #1D9EED">Remove</p>
 
                             </div>
                         </div>
@@ -218,34 +207,11 @@ export const recentLocation = (weather,query) => {
 }
 
 
+// delete a location
 
-
-// export const recentLocation = (weather,query) => {
-    
-//     const markup = document.createElement('div');
-//     markup.className = 'time-wrapper'
-//     markup.className += 't'
-
-//     markup.innerHTML = `
-//               <div class="time-container">
-//                             <p class="time-words words"><span>${query}</span></p>
-//                              <p class="time-num num">${parseInt(weather[0].temperature)}&deg;</p>
-//                              <div class="default">
-//                                  <i style="color: #1D9EED" class="fas fa-cog"></i>
-//                                  <p style="color: #1D9EED">Make Default</p>
-//                                  <i class="far fa-window-close delete"></i>
-//                                  <p style="color: #1D9EED">Remove</p>
-
-//                              </div>
-//                          </div>
-//                          <div>
-//                              <img class="day-image-des" src="${weather[0].iconLink}" alt="${weather[0].iconName}">
-//                          </div>
-    
-    
-//     `;
-//     elements.t.appendChild(markup);
-
-// }
-
-
+export const removeEl = (el) => {
+    if(el.classList.contains('delete')){
+        el.parentElement.parentElement.parentElement.remove()
+        
+    }
+}

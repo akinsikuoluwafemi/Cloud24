@@ -1,4 +1,5 @@
-import Search, { cities } from './models/Search';
+import Search from './models/Search';
+
 import * as  searchView from './views/searchView';
 import { elements, renderLoader, clearLoader,countries } from './views/base';
 import axios from 'axios'
@@ -44,7 +45,7 @@ const controlSearch = async() => {
         searchView.recentLocation(state.search.resultHours, query.toUpperCase());
 
         searchView.renderWeathersDays(state.search.resultDays);
-        searchView.renderWeatherAlerts(state.search.resultDays);
+        // searchView.renderWeatherAlerts(state.search.resultDays);
         elements.searchInput.value
 
 
@@ -67,16 +68,16 @@ elements.searchForm.addEventListener('submit', e => {
 
 elements.searchInput.addEventListener('blur',e => {
     console.log('you just blurred');
-    elements.showSearch.classList.toggle('show')
-    elements.list.classList.toggle('show')
+    elements.showSearch.classList.add('show')
+    elements.list.classList.add('show')
 
 })
 
 
 elements.searchInput.addEventListener('input',e => {
     console.log('you just focused out');
-    elements.showSearch.classList.toggle('show')
-    elements.list.classList.toggle('show')
+    elements.showSearch.classList.remove('show')
+    elements.list.classList.remove('show')
 
 })
 
@@ -103,14 +104,7 @@ function displayMatches() {
         elements.showSearch.innerHTML = html;
 
 }
-// come back here
-// if(elements.list === null){
-    
-// }else {
-//         elements.list.addEventListener('click',(e) => {
-//         console.log(e.target);
-//     })
-// }
+
 
 
 elements.searchInput.addEventListener('change', () => {
@@ -147,7 +141,7 @@ function checkScroll () {
         elements.header.style.top = '0'
 
   }else {
-        elements.header.style.top = '-50px'
+        elements.header.style.top = '-150px';
        
   }
 }
@@ -166,7 +160,6 @@ window.onscroll = checkScroll;
 
 const random = Math.floor(Math.random() * countries.length);   
 
-console.log(countries[random])     
 
 
 
@@ -179,8 +172,6 @@ console.log(countries[random])
         let { hourlyForecasts } = data;
         let { forecastLocation } = hourlyForecasts;
         let { forecast } = forecastLocation;
-     console.log(forecast);  
-     console.log(countries[random])  
      
      searchView.renderHoursOnDomLoad(forecast);
      elements.searchLocation.textContent = query.split(' ', 2).join(' ');
@@ -203,8 +194,6 @@ async function dayAlertOnDomLoad(query) {
         let { forecasts } = data;
         let { forecastLocation } = forecasts;
         let { forecast } = forecastLocation;
-        console.log(forecast);
-    console.log(countries[random]) 
     searchView.renderDaysOnDomLoad(forecast)
         
     }
@@ -215,19 +204,6 @@ document.addEventListener('DOMContentLoaded', dayAlertOnDomLoad(countries[random
 
 elements.searchInput.value
 
-console.log(countries)
-
-// let newCountry = countries.filter(coun => {
-//     return coun.includes('Tur')
-// });
-// console.log(newCountry)
-
-
-// document.addEventListener('click',e => {
-//     console.log(e.target)
-//     e.parentElement.parentElement.parentElement.remove()
-// })
-// console.log(document.querySelector('.delete'))
 
 
 
@@ -238,14 +214,12 @@ export const deleteRecentLocation =(el) => {
     }
 } 
 
-// elements.t.addEventListener('click', e => {
-//     searchView.deleteRecentLocation(e.target);
-// })
 
 
-document.addEventListener('click', e => {
-    console.log(e.parentElement)
-    
+elements.recentLocation.addEventListener('click', e => {
+    searchView.removeEl(e.target);
 })
 
-console.log('boy');
+
+
+    
