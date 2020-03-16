@@ -21,6 +21,7 @@ const controlSearch = async() => {
         // New Search object and add it to state
         state.search = new Search(query);
 
+
         
 
 
@@ -56,12 +57,14 @@ const controlSearch = async() => {
         console.log(state);
 
     }
+  
 
 } 
 
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
+
 })
 
 

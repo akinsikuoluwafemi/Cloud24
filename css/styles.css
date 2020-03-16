@@ -356,7 +356,7 @@ input[type="text"]::-webkit-input-placeholder {
 .dewpoint > span {
     color: #737373;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .barometer {
@@ -727,7 +727,7 @@ input[type="text"]::-webkit-input-placeholder {
     }
 
     .down {
-        margin-top: 14rem;
+        margin-top: 9rem;
     }
   
 }

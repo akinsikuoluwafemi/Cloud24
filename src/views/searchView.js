@@ -27,10 +27,7 @@ export const renderWeatherHours = weather =>{
                         <p class="dewpoint">localTimeFormat: <span>${weather[0].localTimeFormat}</span></p>
 
 
-                        <div class="update"> 
-                            <i class="far fa-clock fa-2x"></i>
-                            <p>Updated <span>${new Date().getHours() - (1) + ":" +new Date().getMinutes()} ${new Date().getHours() % 12 > 12 ? 'AM': 'PM'}</span></p>
-                        </div>
+                        
                         <div class="day-wrapper">
                             <div class="all-time">
                                 <p class="time-words"><span>${weather[11].daylight === 'D' ? weather[11].daylight = 'Morning' : 'Tonight'}</span></p>
@@ -124,10 +121,7 @@ export const renderHoursOnDomLoad = weather => {
                         <p class="dewpoint">localTimeFormat: <span>${weather[0].localTimeFormat}</span></p>
 
 
-                        <div class="update"> 
-                            <i class="far fa-clock fa-2x"></i>
-                            <p>Updated <span>${new Date().getHours() - (1) + ":" + new Date().getMinutes()} ${new Date().getHours() % 12 > 12 ? 'AM' : 'PM'}</span></p>
-                        </div>
+                        
                         <div class="day-wrapper">
                             <div class="all-time">
                                 <p class="time-words"><span>${weather[11].daylight === 'D' ? weather[11].daylight = 'Morning' : 'Tonight'}</span></p>
